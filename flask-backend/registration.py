@@ -35,14 +35,22 @@ def register_employee():
         if connection:
             cursor = connection.cursor()
 
+            #checking if email already exists
+            cursor.execute("SELECT COUNT(*) FROM employee WHERE email = ?",(email,))
+
+            result = cursor.fetchone()
+            if result and result[0] > 0:  # result[0] accesses COUNT(*)
+                return jsonify({'error': 'Email already exists'}), 400 
+
             # Hash the password before storing it
             hashed_password = generate_password_hash(password)
+          
 
             # Execute the SQL query to insert the new employee
             cursor.execute("""
                 INSERT INTO employee (FirstName, LastName, email, password)
                 VALUES (?, ?, ?, ?)
-            """, (firstName, lastName, email, hashed_password))  # Pass the variables using the parameterized query
+            """, (firstName, lastName, email, hashed_password)) 
 
             # Commit the transaction
             connection.commit()
