@@ -8,10 +8,15 @@ function EmployeeForm(){
                                                     lastName:"",
                                                     email:"",
                                                     password:""});
-    
+
     const [message,setMessage] = useState('Loading..');
     const [isSuccess,setIsSuccess] = useState(null); //not successful by default                                      
     const[isDisplaying,setIsDisplaying] = useState(false);
+
+    //usestate on order to display the registered name and email
+    //cant use the previous usestate because it changes everytime user change input even after registering  
+    const [registerName, setRegisterName] = useState('');
+    const [registerEmail, setRegisterEmail] = useState('');
 
     function handleAddFirstName(event){
         setCredential({...credential,firstName:event.target.value})
@@ -43,6 +48,8 @@ function EmployeeForm(){
             if (!response.ok) {
                 const data = await response.json(); // Parse error from backend
                 throw new Error(data.error || 'Registration failed'); // Throw custom error message if exists
+
+                
             }
     
             const data = await response.json();
@@ -50,7 +57,9 @@ function EmployeeForm(){
             console.log(response);
             setMessage('User registered successfully');
             setIsSuccess(true);
-            
+            setRegisterName(credential.firstName + ' ' + credential.lastName);
+            setRegisterEmail(credential.email);
+             
         } catch (error) {
             console.error("Error during registration:", error);
             setMessage(`Registration Failed: ${error.message}`);
@@ -99,8 +108,9 @@ function EmployeeForm(){
             
             <div className={isDisplaying ? `display-status ${isSuccess ? 'success' : 'not-success'}` : 'display-none'}>
                 {isDisplaying && <p>{message}</p>}
-                <div className={isSuccess ? '' : 'display-none'}>Registered as : {credential.firstName+' '+credential.lastName}</div>
-                <div className={isSuccess ? '' : 'display-none'}>With email: {credential.email}</div>
+                
+                <div className={isSuccess ? '' : 'display-none'}>Registered as : {registerName}</div>
+                <div className={isSuccess ? '' : 'display-none'}>With email: {registerEmail}</div>
             </div>
         </form>
       

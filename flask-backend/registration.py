@@ -1,6 +1,7 @@
 from flask import Flask, Blueprint, request, jsonify
 from flask_cors import CORS
 import pyodbc
+import re
 from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
@@ -20,6 +21,12 @@ def get_db_connection():
     except Exception as e:
         print(f"Error connecting to database: {e}")
         return None
+def validate_password(password):
+    if len(password) < 6:
+        return False, "Password must be at least 7 characters long."
+    if not re.search("[0-9]",password):
+        return False, "Password must contain atleast 1 digit."
+    return True,"valid password"
 
 @registration_bp.route('/registration', methods=['POST']) 
 def register_employee():
@@ -30,6 +37,11 @@ def register_employee():
     email = data.get('email')
     password = data.get('password')
 
+    valid_password, message = validate_password(password)
+
+    if not valid_password:
+        return jsonify({'error':message}),400
+    
     try:
         connection = get_db_connection()
         if connection:
@@ -42,6 +54,7 @@ def register_employee():
             if result and result[0] > 0:  # result[0] accesses COUNT(*)
                 return jsonify({'error': 'Email already exists'}), 400 
 
+           
             # Hash the password before storing it
             hashed_password = generate_password_hash(password)
           
