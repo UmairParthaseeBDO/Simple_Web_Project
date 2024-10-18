@@ -111,7 +111,9 @@ function EmployeeForm(){
                 
                 <div className={isSuccess ? '' : 'display-none'}>Registered as : {registerName}</div>
                 <div className={isSuccess ? '' : 'display-none'}>With email: {registerEmail}</div>
+ 
             </div>
+       
         </form>
       
         </div>

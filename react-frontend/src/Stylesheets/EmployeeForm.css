@@ -30,7 +30,7 @@ h1{
 .grid-container{
 
     display: grid;
-    grid-template-columns: 1fr 1fr; 
+    grid-template-columns: repeat(auto-fill, 200px); 
 
     gap: 10px 10px; 
     margin: auto;
@@ -91,10 +91,10 @@ label {
 }
 
 .email-box{
-    width: 100%;
+    width: 92.5%;
 }
 .password-box{
-    width: 100%;
+    width: 92.5%;
 }
 button {
     padding: 10px;
