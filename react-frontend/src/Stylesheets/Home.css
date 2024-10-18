@@ -1,0 +1,55 @@
+.page-style-home{
+
+    position: relative;
+
+    min-height: 100vh;
+    background-image: url(../Images/background-home.jpg);
+    background-size:cover;
+    background-position: center;
+
+}
+.container{
+
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+    margin-top: 20px;
+}
+.title{
+
+    background-color: hsla(0, 0%, 11%, 0.479);
+    color:whitesmoke;
+    text-align:center;
+
+    font-size:80px;
+    display: block;
+}
+
+.button{
+
+    padding: 20px 40px;
+    color: white;
+    background-color: hsl(2, 84%, 54%);
+
+    font-size: 20px;
+    border:none;
+    border-radius: 5px;
+    margin-top: 20px;
+    width:200px;
+    height: 80px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.button:hover{
+    background-color: hsl(2, 68%, 66%);
+}
+.button-description{
+
+    font-size:18px;
+    text-align: center;
+    width:200px;
+    color:white;
+
+}

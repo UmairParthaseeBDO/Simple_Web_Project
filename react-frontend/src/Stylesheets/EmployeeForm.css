@@ -1,0 +1,137 @@
+.page-style{
+ 
+    position: relative;
+
+    background-image: url(../Images/background-register.jpg);
+    background-size: cover;
+    background-position: center;
+
+    background-color: rgba(0, 0, 0, 0.6); /*Dimms the background*/
+    background-blend-mode: darken; 
+    min-height: 100vh; /*100% height*/
+
+}
+h1{
+    text-align: center;
+    font-size: 50px;
+    color: white;
+    /* margin: 0px; */
+}
+
+.title{
+    font-size:50px;
+    font-weight: bold;
+    color:white;
+    background-color: hsla(0, 0%, 0%, 0.233);
+    text-align: center;
+    padding:20px;
+    margin-bottom: 40px;
+}
+.grid-container{
+
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+
+    gap: 10px 10px; 
+    margin: auto;
+    padding:50px;
+
+    background-color: hsla(0, 0%, 0%, 0.589);
+
+    min-height: 400px;
+    max-width:400px;
+
+    border-radius: 10px;
+}
+
+
+.grid-item {
+    /* background-color: rgb(246, 246, 246); */
+    padding: 0px 0px;
+    text-align: left;
+    border: 1px solid #ccc;
+    /* max-width:200px; */
+    max-height:100px;
+
+    border-radius: 5px;
+    border: none;
+}
+
+
+.email {
+    grid-column: span 2;
+
+}
+.password {
+    grid-column: span 2;
+}
+.signup-button{
+    grid-column: span 2;
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+}
+
+label {
+    margin-bottom: 5px; /* Adds space between label and input */
+    font-weight: 600;
+    width: 60px;
+    color: hsl(0, 100%, 98%);
+}
+
+.input-box {
+    padding: 15px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+
+    font-size:12px;
+    font-weight: bold;
+  
+
+}
+
+.email-box{
+    width: 100%;
+}
+.password-box{
+    width: 100%;
+}
+button {
+    padding: 10px;
+    background-color: hsl(122, 39%, 49%);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width:200px;
+    height:50px;
+
+}
+
+button:hover {
+    background-color: rgb(248, 94, 94);
+}
+
+.back-button{
+    background-color: hsla(0, 100%, 50%, 0.788);
+    margin: 10px 30px;
+    font-size: 15px;
+}
+
+.display-status{
+    border-radius: 15px;
+
+    color: white;
+    font-size: large;
+    text-align: center;
+    grid-column: span 2;
+}
+.not-success{
+    background-color: red;
+}
+.success{
+    background-color: green;
+}
+.display-none{
+    display: none;
+}
