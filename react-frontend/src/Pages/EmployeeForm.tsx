@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {ReactEventHandler, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Stylesheets/EmployeeForm.css'
 
@@ -10,32 +10,34 @@ function EmployeeForm(){
                                                     password:""});
 
     const [message,setMessage] = useState('Loading..');
-    const [isSuccess,setIsSuccess] = useState(null); //not successful by default                                      
+    //useState can either be null or boolean
+    const [isSuccess,setIsSuccess] = useState<boolean | null>(null); //not successful by default                                      
     const[isDisplaying,setIsDisplaying] = useState(false);
 
     //usestate on order to display the registered name and email
     //cant use the previous usestate because it changes everytime user change input even after registering  
     const [registerName, setRegisterName] = useState('');
     const [registerEmail, setRegisterEmail] = useState('');
-
-    function handleAddFirstName(event){
+    
+    //added the correct type for the event parameter.
+    function handleAddFirstName(event: React.ChangeEvent<HTMLInputElement>){
         setCredential({...credential,firstName:event.target.value})
 
     }
-    function handleAddLastName(event){
+    function handleAddLastName(event: React.ChangeEvent<HTMLInputElement>){
         setCredential({...credential,lastName:event.target.value})
 
     }
-    function handleAddEmail(event){
+    function handleAddEmail(event: React.ChangeEvent<HTMLInputElement>){
         setCredential({...credential,email:event.target.value})
 
     }
-    function handleAddPassword(event){
+    function handleAddPassword(event: React.ChangeEvent<HTMLInputElement>){
         setCredential({...credential,password:event.target.value})
 
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = async (event: React.ChangeEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         try {
@@ -61,8 +63,15 @@ function EmployeeForm(){
             setRegisterEmail(credential.email);
              
         } catch (error) {
+
             console.error("Error during registration:", error);
-            setMessage(`Registration Failed: ${error.message}`);
+
+            // Check if error is of type Error
+            if (error instanceof Error) {
+                setMessage(`Registration Failed: ${error.message}`);
+            } else {
+                setMessage('Registration Failed: Unknown error');
+            }
             setIsSuccess(false);
         }
     };
